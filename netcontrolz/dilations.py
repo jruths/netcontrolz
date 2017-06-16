@@ -4,7 +4,7 @@ This module provides tools to identify dilations in a directed network.
 from zen import DiGraph
 from rank import generic_rank
 
-__all__ = ['num_dilations']
+__all__ = ['num_dilations','all_in_neighbors','all_in_neighbors_']
 
 def num_dilations(G):
 	"""
@@ -16,3 +16,22 @@ def num_dilations(G):
 		
 	return max([len(G) - generic_rank(G),1])
 
+def all_in_neighbors(G,S):
+	"""
+	Returns the set of nodes (node objects) in the directed graph ``G`` that have 
+	directed edges pointing to nodes in the set ``S``, a set of node objects.
+	"""
+    nbrs = set([])
+    for nobj in S:
+        nbrs.update(set(G.in_neighbors(nobj)))
+    return nbrs
+    
+def all_in_neighbors_(G,S):
+	"""
+	Returns the set of nodes (node indices) in the directed graph ``G`` that have 
+	directed edges pointing to nodes in the set ``S``, a set of node indices.
+	"""
+    nbrs = set([])
+    for nidx in S:
+        nbrs.update(set(G.in_neighbors_(nidx)))
+    return nbrs
