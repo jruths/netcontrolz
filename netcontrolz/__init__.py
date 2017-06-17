@@ -35,8 +35,9 @@ networks.  Two functions are provided for this purpose.
 
 """
 
-from profile import profile
-from reachability import kalman_generic_rank, generic_rank
-from pplot import profile_plot, profile_heatmap, profile_heatmap_weighted
-from cacti import build_cacti, build_cacti_fixed_controls_, build_cacti_free_controls
-from dilations import num_dilations
+from profile import *
+from rank import *
+from pplot import *
+from cacti import *
+from dilations import *
+from robustness import *
