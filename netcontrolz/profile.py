@@ -9,7 +9,9 @@ This module implements functions surrounding the calculation of control profiles
 from zen.digraph import DiGraph
 from zen.exceptions import type_check
 
-from reachability import num_min_controls
+from rank import num_dilations
+
+__all__ = ['profile']
 
 def profile(G,**kwargs):
 	"""
@@ -31,7 +33,7 @@ def profile(G,**kwargs):
 	normalized = kwargs.pop('normalized',True)
 	type_check(normalized,bool)
 	
-	Nc = float(num_dilations(G))
+	Nc = float(max(num_dilations(G),1))
 	
 	# source dilations
 	Ns = float(G.num_sources)

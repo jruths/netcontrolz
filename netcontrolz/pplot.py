@@ -305,7 +305,7 @@ def _plot_profiles(items, **kwargs): # heatmap=False, color='b', marker='o', mar
 	If the heatmap=True flag is set, a heatmap will be generated instead of a scatter plot. The resolution of the mesh
 	can be controlled using num_steps. If no matplotlib color map name or color map is supplied (cmap), one will be
 	generated using a gradient between white and color.
-	
+
 	The arguments are documented in more detail below in comments.
 	"""
 	#####

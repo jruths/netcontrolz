@@ -10,11 +10,12 @@ def num_dilations(G):
 	"""
 	Returns the number of dilations in the directed network ``G``. This is also 
 	equivalent to the smallest number of controls that are required to structurally 
-	control the graph ``G``.
+	control the graph ``G`` (except in the degenerate case when there are zero 
+	dilations, but one control).
 	"""
 	type_check(G,DiGraph)
 		
-	return max([len(G) - generic_rank(G),1])
+	return len(G) - generic_rank(G)
 
 def all_in_neighbors(G,S):
 	"""

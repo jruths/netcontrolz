@@ -1,8 +1,8 @@
 """
-The ``zen.control`` package provides functions and classes for analyzing the control structure of a network.  In particular, much of the
-functionality currently implemented focuses on the perspective and machinery provided by structural controllability.
+The ``netcontrolz`` library provides functions and classes for analyzing the control structure of a network.  In particular, much of the
+functionality currently implemented focuses on the perspective and machinery provided by structural controllability. ``netcontrolz`` is
+built on top of the Zero-Effort Network (zen) Python network library.
 
-*This package is currently under active development and will be regularly updated, though the API specified will remain stable.*
 
 Rank
 ------------

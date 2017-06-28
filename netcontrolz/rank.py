@@ -5,11 +5,12 @@ import zen
 from zen import DiGraph, maximum_matching_
 from zen.exceptions import type_check
 
+__all__ = ['kalman_generic_rank','generic_rank']
 
 def kalman_generic_rank(G,controls,repeats=100):
 	"""
 	Finds the reachability corresponding to a graph (adjacency matrix A) and its
-	controls (a matrix B) by brute force computing the Kalman rank condition:
+	controls (a list of tuples) by brute force computing the Kalman rank condition:
 		rank [B AB A^2B A^3B ... A^(n-1)B].
 	In order to compute the rank generically, we generate random entries for A and B,
 	subject to their zero/non-zero sparsity patterns and compute the true rank. We
