@@ -6,7 +6,7 @@ and their control configurations.
 from numpy import zeros
 from numpy.random import random
 
-def control_idx(G,controls):
+def controls_idx(G,controls):
 	controls_ = []
 	for control in controls:
 		controls_.append( tuple( [G.node_idx(c) for c in control]  ) )
@@ -29,11 +29,13 @@ def matrix_realization(M,a,b):
 	return R
 
 def grammian(G,controls,T):
-	return grammian_(G,control_idx(controls),T)
+	return grammian_(G,controls_idx(controls),T)
 
 def grammian_(G,controls_,T):
 	A = G.matrix().T
 	n = len(A)
 	B = B_(n,controls_)
-	
+
+
+
 	return

@@ -4,12 +4,15 @@ This module provides functionality for building, querying, and manipulating the 
 For information cacti structures, see the following reference:
 Commault, Dion, Van der Woude. Characterization of generic properties of linear structured systems for efficient computations. Kybernetika, 38(5):503-520, 2002.
 """
-import sys, zen
+from sys import setrecursionlimit
+from zen import DiGraph
+from zen.matching import maximum_matching_, _max_weight_matching
+from zen.exceptions import type_check
 from collections import OrderedDict
-from numpy import *
+#from numpy import *
 from exceptions import *
 import itertools as it
-sys.setrecursionlimit(2**27)
+setrecursionlimit(2**27)
 
 __all__ = ['build_cacti','build_cacti_fixed_controls_','build_cacti_fixed_controls','build_cacti_free_controls','build_cacti_from_matching','build_cacti_from_matching_']
 
@@ -125,7 +128,7 @@ class Cycle:
 
     def __contains__(self,x):
         """
-        Return ``True`` if ``x`` is a node in the cycle 
+        Return ``True`` if ``x`` is a node in the cycle
         """
         return x in self._node_dict
 
@@ -279,7 +282,7 @@ def _stems_cycs_from_matching(Gi, matching, roots=None, origins=[]):
     for r in roots:
         if r not in vis:
            recur(r,[],stems,cycs)
-    
+
     return stems, cycs
 
 def build_cacti_from_matching(G, fixed_ctls, matching, roots=None):
@@ -294,6 +297,8 @@ def build_cacti_from_matching(G, fixed_ctls, matching, roots=None):
 
     Returns a py:class:`Cacti` object
     """
+    type_check(G,DiGraph,'only directed graphs are supported')
+
     if fixed_ctls is None:
         raise ValueError, "fixed_ctls cannot be None."
     if matching is None:
@@ -323,7 +328,7 @@ def build_cacti_from_matching_(G, fixed_ctls, matching, roots=None):
             *:py:class:`list': The list of edge indices that indicate the edges belonging
                 to a maximum-matching for the graph.
         * ``roots'' (:py:class:`list')
-            *:py:class:`list': The roots of the matching (the indices of the nodes at the 
+            *:py:class:`list': The roots of the matching (the indices of the nodes at the
                 base of the stems of the matching); if none, the roots are identified automatically
 
     **Raises**:
@@ -331,6 +336,7 @@ def build_cacti_from_matching_(G, fixed_ctls, matching, roots=None):
 
     Returns a py:class:`Cacti` object
     """
+    type_check(G,DiGraph,'only directed graphs are supported')
 
     if fixed_ctls is None:
         raise ValueError, "fixed_ctls cannot be None."
@@ -357,6 +363,8 @@ def build_cacti_fixed_controls(G, fixed_ctls, **kwargs):
 
     Returns a py:class:`Cacti` object
     """
+    type_check(G,DiGraph,'only directed graphs are supported')
+
     if fixed_ctls is None:
         raise ValueError, "fixed_ctls cannot be None."
 
@@ -389,6 +397,7 @@ def build_cacti_fixed_controls_(G, fixed_ctls, **kwargs):
 
     Returns a py:class:`Cacti` object
     """
+    type_check(G,DiGraph,'only directed graphs are supported')
 
     if fixed_ctls is None:
         raise ValueError, "fixed_ctls cannot be None."
@@ -420,6 +429,10 @@ def build_cacti_free_controls(G, num_ctls, **kwargs):
 
     Returns a py:class:`Cacti` object
     """
+    type_check(G,DiGraph,'only directed graphs are supported')
+
+    if num_ctls < 1:
+        raise ValueError, "num_ctls cannot be less than one."
 
     cact = Cacti(G)
 
@@ -437,6 +450,8 @@ def build_cacti(G):
 
     Returns a py:class:`Cacti` object
     """
+    type_check(G,DiGraph,'only directed graphs are supported')
+
     cact = Cacti(G)
 
     cact._min_controls_case()
@@ -548,7 +563,7 @@ class Cacti:
     def _min_controls_case(self):
         #TODO Randomize matching
         G = self._G
-        matching = set(zen.matching.maximum_matching_(G))
+        matching = set(maximum_matching_(G))
         matching = [G.endpoints_(eidx) for eidx in matching]
         stems, cycles = _stems_cycs_from_matching(G, matching)
         # in the min controls case, any remaining unmatched nodes (isolated nodes), we need to add a stem and control
@@ -564,7 +579,7 @@ class Cacti:
         kwargs['controls'] = fixed_ctls
         G = self._G
         origins = [a for b in fixed_ctls for a in b]
-        matching,roots = zen.matching.__max_weight_matching(G, **kwargs)[1:3]
+        matching,roots = __max_weight_matching(G, **kwargs)[1:3]
         matching = [G.endpoints_(eidx) for eidx in matching]
         self._stems, self._cycles = _stems_cycs_from_matching(G, matching, roots, origins)
         self._matching = matching
@@ -576,7 +591,7 @@ class Cacti:
         G = self._G
         ctls = [ tuple(G.nodes_()) for x in xrange(num_ctls) ]
         kwargs['controls'] = ctls
-        matching,roots = zen.matching.__max_weight_matching(G, **kwargs)[1:3]
+        matching,roots = __max_weight_matching(G, **kwargs)[1:3]
         matching = [ G.endpoints_(eidx) for eidx in matching ]
         self._stems, self._cycles = _stems_cycs_from_matching(G, matching, roots=roots)
         self._matching = matching
@@ -591,7 +606,7 @@ class Cacti:
 
     def controls(self):
         """
-        Returns list of nodes (objects) where controls should be attached. 
+        Returns list of nodes (objects) where controls should be attached.
         In case of unweighted matching, it is the minimum number
         of controls required for full control of the network. In case of
         weighted matching (when fixed set of controls are given), this method
@@ -603,7 +618,7 @@ class Cacti:
 
     def controls_(self):
         """
-        Returns list of nodes (indices) where controls should be attached. 
+        Returns list of nodes (indices) where controls should be attached.
         In case of unweighted matching, it is the minimum number
         of controls required for full control of the network. In case of
         weighted matching (when fixed set of controls are given), this method
@@ -641,4 +656,3 @@ class Cacti:
         Returns a  matching, a list of edge indices as calculated by the maximum matching algorithm (unweighted or weighted as the case maybe)
         """
         return [self._G.edge_idx_(u,v) for u,v in self._matching]
-

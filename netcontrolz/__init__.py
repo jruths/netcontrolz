@@ -7,7 +7,7 @@ built on top of the Zero-Effort Network (zen) Python network library.
 Rank
 ------------
 
-Under structural controllability, a set of directly controlled nodes can control a limited set of other nodes.  The 
+Under structural controllability, a set of directly controlled nodes can control a limited set of other nodes.  The
 number of such nodes that can be controlled is called the *reachability* or *generic rank* of the network under those
 controls.
 
@@ -22,7 +22,7 @@ controls a network requires and where these controls much attach to the network.
 
 .. seealso::
 
-	J. Ruths and D. Ruths (2014). Control Profiles of Complex Networks. Science, 343(6177), 1373-1376.
+    J. Ruths and D. Ruths (2014). Control Profiles of Complex Networks. Science, 343(6177), 1373-1376.
 
 .. autofunction:: profile(G,...)
 

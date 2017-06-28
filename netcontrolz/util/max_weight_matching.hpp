@@ -32,11 +32,11 @@ class FiboHeap {
         hsize=0; min_node = NULL;
     }
     ~FiboHeap() {
-		// Justin & Giorgio added this to fix a memory problem
-		// Previously comment said: // TODO free memory if required
+        // Justin & Giorgio added this to fix a memory problem
+        // Previously comment said: // TODO free memory if required
         while(this->is_empty() == false) {
-			delete_min();
-		}
+            delete_min();
+        }
     }
 
     void insert(fibnode_t *node) {
@@ -236,14 +236,14 @@ void _augment_path_to(vector<edge_t> &E, int pred[], int v)     {
 }
 
 
-void _relax(vector< vector<int> > &G, vector<edge_t> &E, int pred[], double dist[], 
-                fibnode_t *nodes, vector<int>  &RB, double pot[], FiboHeap &pq, int a)      
+void _relax(vector< vector<int> > &G, vector<edge_t> &E, int pred[], double dist[],
+                fibnode_t *nodes, vector<int>  &RB, double pot[], FiboHeap &pq, int a)
 {
     vector<int> &edges = G[a];
     for(vector<int>::iterator iv = edges.begin(); iv != edges.end(); iv++)  {
         int eidx = *iv;
         edge_t &edge = E[eidx];
-        if(edge.src != a) 
+        if(edge.src != a)
             continue;
 
         int b = edge.tgt;
@@ -251,7 +251,7 @@ void _relax(vector< vector<int> > &G, vector<edge_t> &E, int pred[], double dist
         if(pred[b] == -1)       {
             dist[b] = db;  pred[b] = eidx ;
             RB.push_back(b);
-	    nodes[b].init();
+        nodes[b].init();
             nodes[b].val = b; nodes[b].key = db; nodes[b].inheap=true;
             pq.insert(&nodes[b]);
         } else if(db < dist[b])         {
@@ -263,14 +263,14 @@ void _relax(vector< vector<int> > &G, vector<edge_t> &E, int pred[], double dist
 }
 
 
-void mwb_matching(vector< vector<int> > &G, vector<edge_t> &E, 
-		vector<int> &U, vector<int> &V, vector<int> &M) 	{
+void mwb_matching(vector< vector<int> > &G, vector<edge_t> &E,
+        vector<int> &U, vector<int> &V, vector<int> &M)     {
     FiboHeap pq;
     int N = G.size();
-    double *pot = new double[N]; 
-    bool *isfree = new bool[N]; 
-    int *pred = new int[N]; 
-    double *dist = new double[N]; 
+    double *pot = new double[N];
+    bool *isfree = new bool[N];
+    int *pred = new int[N];
+    double *dist = new double[N];
     fibnode_t *nodes = new fibnode_t[N];
     vector<int> RA, RB;
     RA.reserve(N); RB.reserve(N);
@@ -279,39 +279,39 @@ void mwb_matching(vector< vector<int> > &G, vector<edge_t> &E,
         pot[i] = dist[i] = 0.0;
         isfree[i] = true;
         pred[i] = -1;
-	nodes[i].init();
+    nodes[i].init();
     }
 
     for(vector<int>::iterator it = U.begin(); it != U.end(); it++)         {
-        int a = *it; 
+        int a = *it;
         double maxw = -INF;
         edge_t *maxe = NULL;
 
         vector<int> &edges = G[a];
         for(vector<int>::iterator iv = edges.begin(); iv != edges.end(); iv++)  {
             edge_t &edge = E[*iv];
-            if(edge.src != a) 
+            if(edge.src != a)
                 continue;
-                
+
             if(edge.w > maxw) {
-                maxw = edge.w; 
+                maxw = edge.w;
                 maxe = &edge;
             }
-            
+
         }
 
         pot[a] = maxw;
         if(maxe != NULL)  {
             assert( a != maxe->tgt);
             if(isfree[maxe->tgt])    {
-                maxe->src = maxe->tgt; maxe->tgt = a;    
+                maxe->src = maxe->tgt; maxe->tgt = a;
                 isfree[maxe->src] = isfree[maxe->tgt] = false;
             }
         }
     }
 
     for(vector<int>::iterator it = U.begin(); it != U.end(); it++)         {
-        int a = *it; 
+        int a = *it;
 
         if(!isfree[a]) continue;
 
@@ -355,7 +355,7 @@ void mwb_matching(vector< vector<int> > &G, vector<edge_t> &E,
                     vector<int> &edges = G[b];
                     for(vector<int>::iterator iv = edges.begin(); iv != edges.end(); iv++)  {
                         edge_t &edge = E[*iv];
-                        if(edge.src != b) 
+                        if(edge.src != b)
                             continue;
                         eidx = *iv; a1 = edge.tgt;
                         break;
@@ -404,7 +404,7 @@ void mwb_matching(vector< vector<int> > &G, vector<edge_t> &E,
         for(vector<int>::iterator iv = edges.begin(); iv != edges.end(); iv++)  {
             int e = *iv;
             edge_t &edge = E[e];
-            if(edge.src != b) 
+            if(edge.src != b)
                 continue;
 
             M.push_back(e);
@@ -419,6 +419,3 @@ void mwb_matching(vector< vector<int> > &G, vector<edge_t> &E,
     delete[] dist, delete[] nodes;
 
 }
-
-
-
