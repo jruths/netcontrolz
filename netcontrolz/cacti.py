@@ -6,8 +6,9 @@ Commault, Dion, Van der Woude. Characterization of generic properties of linear 
 """
 from sys import setrecursionlimit
 from zen import DiGraph
-from zen.matching import maximum_matching_, _max_weight_matching
+from zen.algorithms.matching import maximum_matching_
 from zen.exceptions import type_check
+from util.matching import max_weight_matching_
 from collections import OrderedDict
 #from numpy import *
 from exceptions import *
@@ -579,7 +580,7 @@ class Cacti:
         kwargs['controls'] = fixed_ctls
         G = self._G
         origins = [a for b in fixed_ctls for a in b]
-        matching,roots = __max_weight_matching(G, **kwargs)[1:3]
+        matching,roots = maximum_weight_matching_(G, **kwargs)[1:3]
         matching = [G.endpoints_(eidx) for eidx in matching]
         self._stems, self._cycles = _stems_cycs_from_matching(G, matching, roots, origins)
         self._matching = matching
@@ -591,7 +592,7 @@ class Cacti:
         G = self._G
         ctls = [ tuple(G.nodes_()) for x in xrange(num_ctls) ]
         kwargs['controls'] = ctls
-        matching,roots = __max_weight_matching(G, **kwargs)[1:3]
+        matching,roots = maximum_weight_matching_(G, **kwargs)[1:3]
         matching = [ G.endpoints_(eidx) for eidx in matching ]
         self._stems, self._cycles = _stems_cycs_from_matching(G, matching, roots=roots)
         self._matching = matching

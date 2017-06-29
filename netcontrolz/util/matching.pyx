@@ -25,7 +25,7 @@ from cython.operator cimport dereference as dref
 from cython.operator cimport preincrement as incr
 
 
-__all__ = ['maximum_matching','maximum_matching_','hopcroft_karp_']
+__all__ = ['maximum_weight_matching_']
 
 # TODO(druths): Add support for matching undirected networks
 
@@ -42,7 +42,7 @@ cdef extern from "max_weight_matching.hpp":
 #def max_weight_matching_(G):
 #
 
-def __max_weight_matching(Gi, **kwargs):
+def maximum_weight_matching_(Gi, **kwargs):
     """
         Find maximum weighted matching for given Directed Graph ``G``
 
@@ -228,7 +228,7 @@ def __max_weight_matching(Gi, **kwargs):
 
     return num_matched, result, roots
 
-def __directed_max_weight_matching(Gi, **kwargs):
+def directed_max_weight_matching(Gi, **kwargs):
     cdef:
         vector[int] *U
         vector[int] *V
@@ -332,7 +332,7 @@ def __directed_max_weight_matching(Gi, **kwargs):
 
 NO_COUNT_EDGE = '1234nocount'
 
-def __directed_fixed_roots_max_weight_matching(Gi, **kwargs):
+def directed_fixed_roots_max_weight_matching(Gi, **kwargs):
     cdef:
         vector[int] *U
         vector[int] *V
@@ -493,7 +493,7 @@ def __directed_fixed_roots_max_weight_matching(Gi, **kwargs):
 
     return num_matched, result, selected_roots
 
-def __directed_free_roots_max_weight_matching(Gi, **kwargs):
+def directed_free_roots_max_weight_matching(Gi, **kwargs):
 
     num_roots = kwargs.pop('num_roots', 0)
     force_use_all = kwargs.pop('force_use_all', False)

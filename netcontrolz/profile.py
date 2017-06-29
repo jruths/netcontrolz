@@ -9,7 +9,7 @@ This module implements functions surrounding the calculation of control profiles
 from zen.digraph import DiGraph
 from zen.exceptions import type_check
 
-from rank import num_dilations
+from dilations import num_dilations
 
 __all__ = ['profile']
 
