@@ -28,23 +28,38 @@ from scipy.linalg import eigvals, inv, eigvalsh
 import matplotlib.pyplot as plt
 from numpy.random import choice
 
-# 500 nodes, average degree of 20
-n = 500
-p = 20.0/n
+n = 500 # number of nodes
+p = 2.0/n
 G = zen.generating.erdos_renyi(n,p)
 
+# As = G.matrix().T
+# B = netcontrolz.input_matrix_(n,[(0,)])
+# # find realizations of each matrix
+# A = netcontrolz.matrix_realization(As,0.5,1.5)
+# A = netcontrolz.fix_diagonals(A,-150)
+#
+# H = netcontrolz.finite_horizon_gramian(A,B,1)
+# d = eigvals(H)
+# eigmax = d.real.max()
+# eigmin = d.real.min()
+#
+# print eigmin, eigmax
+#
+# print 'Emin = %.4E' % (1/eigmax)
+
+# Try in discrete time
 As = G.matrix().T
-Bs = netcontrolz.input_matrix_(n,[(0,)])
-# find realizations of each matrix
+B = netcontrolz.input_matrix_(n,[(0,)])
+# find a realizations A
 A = netcontrolz.matrix_realization(As,0,1)
-A = netcontrolz.fix_diagonals(A,0.25)
-B = Bs #netcontrolz.matrix_realization(Bs)
-
-H = netcontrolz.finite_horizon_grammian(A,B,1)
-d = eigvals(H)
-eigmax = d.real.max()
-eigmin = d.real.min()
-
+A = netcontrolz.fix_diagonals(A,10)
+d = eigvalsh(A)
+print d.min(), d.max()
+W = netcontrolz.finite_horizon_discrete_gramian(A,B,5)
+d = eigvalsh(W)
+eigmax = d.max()
+eigmin = d.min()
 print eigmin, eigmax
 
-print 'Emin = %1.2f' % (1/eigmax)
+print 'Emin = %.4E' % (1/eigmax)
+print 'Emax = %.4E' % (1/eigmin)
