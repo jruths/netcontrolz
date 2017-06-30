@@ -2,10 +2,15 @@ netcontrolz is a Python library built on top of the [zen](http://zen.networkdyna
 
 ## Installation
 
-To install zenlib do the following:
+To install netcontrolz do the following:
 
 - ``git clone`` the repository
 - Install: zen and its dependencies
 - ``cd`` to ``netcontrolz/`` and run ``python setup.py install``
+
+This library is maintained by
+- [Justin Ruths](http://justinruths.com) [email with questions or comments](mailto:jruths@utdallas.edu)
+- [Derek Ruths](http://derekruths.com)
+- [Tyler Summers](http://www.utdallas.edu/~tyler.summers/)
 
 License: BSD
