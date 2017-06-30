@@ -363,6 +363,9 @@ def _plot_profiles(items, **kwargs): # heatmap=False, color='b', marker='o', mar
             if len(p) == 2:
                 pts.append( (p[0],p[1],1-p[0]-p[1]) )
             elif len(p) == 3:
+                s = p[0]+p[1]+p[2]
+                if s > 1:
+                    p = (p[0]/float(s), p[1]/float(s), p[2]/float(s))
                 pts.append( p )
             else:
                 raise TypeError, 'plot_profiles supports lists of tupes/lists of length 2 or 3 only; found length %i.' % len(p)

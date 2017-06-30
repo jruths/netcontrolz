@@ -8,7 +8,7 @@ from sys import setrecursionlimit
 from zen import DiGraph
 from zen.algorithms.matching import maximum_matching_
 from zen.exceptions import type_check
-from util.matching import max_weight_matching_
+from netcontrolz.util import maximum_weight_matching_
 from collections import OrderedDict
 #from numpy import *
 from exceptions import *

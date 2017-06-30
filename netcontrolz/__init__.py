@@ -35,9 +35,12 @@ networks.  Two functions are provided for this purpose.
 
 """
 
-from profile import *
-from rank import *
-from pplot import *
 from cacti import *
 from dilations import *
+from lti import *
+from metrics import *
+from pplot import *
+from profile import *
+from rank import *
 from robustness import *
+import util
