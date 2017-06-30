@@ -8,6 +8,7 @@ To install netcontrolz do the following:
 - Install: zen and its dependencies
 - ``cd`` to ``netcontrolz/`` and run ``python setup.py install``
 
+## Attribution, Questions, and Feedback
 This library is maintained by
 - [Justin Ruths](http://justinruths.com) [email with questions or comments](mailto:jruths@utdallas.edu)
 - [Derek Ruths](http://derekruths.com)
