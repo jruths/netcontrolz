@@ -76,7 +76,7 @@ class Stem:
 
     def _extend(self, nodes):
         """
-        Extend stem by adding nodes at the end. Needed when a bud is attached
+        Extend stem by adding ``nodes`` (``py:iterable``) at the end. Needed when a bud is attached
         at terminus of the stem, in which case the bud is broken down and stem
         is extended.
         """
@@ -114,7 +114,7 @@ class Stem:
 
 class Cycle:
     """
-    :py:class:Cycle can either be a bud that is connected to a stem by a
+    :py:class:`Cycle` can either be a bud that is connected to a stem by a
     distinguished node or an independent cycle (no associated stem).
     """
     def __init__(self, Gi, node_seq):
@@ -296,7 +296,7 @@ def build_cacti_from_matching(G, fixed_ctls, matching, roots=None):
               Only difference here is that fixed_ctls are node objs and not
               indices. The matching is passed as tuples of node pairs.
 
-    Returns a py:class:`Cacti` object
+    Returns a :py:class:`Cacti` object
     """
     type_check(G,DiGraph,'only directed graphs are supported')
 
@@ -319,23 +319,20 @@ def build_cacti_from_matching_(G, fixed_ctls, matching, roots=None):
     and the subset of roots that are controlled (the fixed_ctrls).
 
     **Args**:
+        * ``fixed_ctls`` (``LIST_OF_TUPLES``)
 
-        *``fixed_ctls`` (``LIST_OF_TUPLES``)
-            *``LIST_OF_TUPLES``: Represents control nodes that are
-                attached to the nodes in G. e.g. [(1,),(3,)] represents two controls
-                that are attached to node indices 1 and 3 in G. These indices should be
+            * ``LIST_OF_TUPLES``: Represents control nodes that are
+                attached to the nodes in G. e.g., ``[(1,),(3,)]`` represents two controls
+                that are attached to node indices 1 and 3 in ``G``. These indices should be
                 a subset of the roots of the matching or part of a cycle.
-        * ``matching'' (:py:class:`list')
-            *:py:class:`list': The list of edge indices that indicate the edges belonging
-                to a maximum-matching for the graph.
-        * ``roots'' (:py:class:`list')
-            *:py:class:`list': The roots of the matching (the indices of the nodes at the
-                base of the stems of the matching); if none, the roots are identified automatically
+
+        * ``matching`` (:py:class:`list`) The list of edge indices that indicate the edges belonging to a maximum-matching for the graph.
+        * ``roots`` (:py:class:`list`) The roots of the matching (the indices of the nodes at the base of the stems of the matching); if none, the roots are identified automatically
 
     **Raises**:
         ``ValueError``: if fixed_ctls or matching is None
 
-    Returns a py:class:`Cacti` object
+    Returns a :py:class:`Cacti` object
     """
     type_check(G,DiGraph,'only directed graphs are supported')
 
@@ -362,7 +359,7 @@ def build_cacti_fixed_controls(G, fixed_ctls, **kwargs):
               Only difference here is that fixed_ctls are node objs and not
               indices.
 
-    Returns a py:class:`Cacti` object
+    Returns a :py:class:`Cacti` object
     """
     type_check(G,DiGraph,'only directed graphs are supported')
 
@@ -380,23 +377,23 @@ def build_cacti_fixed_controls_(G, fixed_ctls, **kwargs):
     the fixed controls.
 
     **Args**:
+        * ``fixed_ctls`` (``LIST_OF_TUPLES``)
 
-        *``fixed_ctls`` (``LIST_OF_TUPLES``)
-            *``LIST_OF_TUPLES``: Represents control nodes that are
-                attached to the nodes in G. e.g. [(1,),(3,)] represents two controls
-                that are attached to node indices 1 and 3 in G.
+            * ``LIST_OF_TUPLES``: Represents control nodes that are
+                attached to the nodes in G. e.g., ``[(1,),(3,)]`` represents two controls
+                that are attached to node indices 1 and 3 in ``G``.
 
     **KwArgs**:
-        *``randomize[=False]`` (``Boolean``). Indicates whether the matching
+        * ``randomize[=False]`` (``Boolean``). Indicates whether the matching
             should be randomized
-        *``with_cycles[=False]`` (``Boolean``). Indicates whether
+        * ``with_cycles[=False]`` (``Boolean``). Indicates whether
             cycles not reachable from the ``fixed_ctls`` should be
             included in the matching/cacti
 
     **Raises**:
         ``ValueError``: if fixed_ctls is None
 
-    Returns a py:class:`Cacti` object
+    Returns a :py:class:`Cacti` object
     """
     type_check(G,DiGraph,'only directed graphs are supported')
 
@@ -419,7 +416,6 @@ def build_cacti_free_controls(G, num_ctls, **kwargs):
     the number of controls.
 
     **Args**:
-
         * ``num_ctls`` (``int``): Number of control nodes that are
           to be attached to the nodes in G. If num_ctls is 0 a degenerate
           matching of only cycles will be found.
@@ -428,7 +424,7 @@ def build_cacti_free_controls(G, num_ctls, **kwargs):
         * ``randomize[=False]`` (``Boolean``). Indicates whether the matching
           should be randomized
 
-    Returns a py:class:`Cacti` object
+    Returns a :py:class:`Cacti` object
     """
     type_check(G,DiGraph,'only directed graphs are supported')
 
@@ -449,7 +445,7 @@ def build_cacti(G):
     using maximum unweighted matching. The resulting matching forms a cacti
     which also gives the minimum number and locations of controls required for the full control.
 
-    Returns a py:class:`Cacti` object
+    Returns a :py:class:`Cacti` object
     """
     type_check(G,DiGraph,'only directed graphs are supported')
 
@@ -462,7 +458,7 @@ def build_cacti(G):
 
 class Cacti:
     """
-    The Cacti class represents the cacti  control structure of a given network. It can be used to find the location (and number) of inputs required to control the network as
+    The Cacti class represents the cacti control structure of a given network. It can be used to find the location (and number) of inputs required to control the network as
     well as to access the underlying cacti structure.  It can also be used to find the extent to which a network can be controlled
     by a specified set of controls and the related constrained cacti.
     """

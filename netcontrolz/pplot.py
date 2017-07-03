@@ -364,7 +364,7 @@ def _plot_profiles(items, **kwargs): # heatmap=False, color='b', marker='o', mar
                 pts.append( (p[0],p[1],1-p[0]-p[1]) )
             elif len(p) == 3:
                 s = p[0]+p[1]+p[2]
-                if s > 1:
+                if s != 1.0:
                     p = (p[0]/float(s), p[1]/float(s), p[2]/float(s))
                 pts.append( p )
             else:
@@ -398,15 +398,18 @@ def _plot_profiles(items, **kwargs): # heatmap=False, color='b', marker='o', mar
         pyplot.gca().set_frame_on(False)
         return None
 
-def profile_heatmap_weighted(items, weights=None, **kwargs):
+def profile_heatmap_weighted(items,**kwargs):
     """
-    Plots a weighted combination of control profiles as a heatmap on a triangular control profile plot. ``items`` is a list
-    of other lists composed of: control profile 3-tuple, 3-list, or :py:class:`zen.DiGraph` (in which case the control
-    profile of the graph will be computed and then plotted). A ``weights'' parameter can be specified to weight the
-    combination.
+    Plots a weighted combination of control profiles as a heatmap on a triangular control
+    profile plot. ``items`` is a list of other lists composed of: control profile 3-tuple,
+    3-list, or :py:class:`zen.DiGraph` (in which case the control profile of the graph will be
+    computed and then plotted). A ``weights'' parameter can be specified to weight the
+    combination, typically used to combine multiple categories together in and equitable
+    manner.
 
-    The resolution of the mesh can be controlled using ``num_steps``. If no matplotlib color map name or color map is
-    supplied (``cmap``), one will be generated using a gradient between white and color.
+    The resolution of the mesh can be controlled using ``num_steps``. If no matplotlib
+    color map name or color map is supplied (``cmap``), one will be generated using a
+    gradient between white and color.
 
     **KwArgs**:
 
@@ -426,6 +429,7 @@ def profile_heatmap_weighted(items, weights=None, **kwargs):
     num_steps = kwargs.pop('num_steps',15)
     cmap = kwargs.pop('cmap',None)
     color = kwargs.pop('color','b')
+    color = kwargs.pop('weights',None)
 
     D = None
     if weights is None: # if no weights are given make them weighted equally

@@ -1,10 +1,13 @@
 """
-This script recreates the most significant results from the paper below. In particular,
-this paper characterizes the robustness properties of Erdos-Renyi and Barabasi-Albert
+Jijju Thomas, Supratim Ghosh, Deven Parek, Derek Ruths, Justin Ruths. *Robustness of Network Controllability to Degree-Based Edge Attacks*. Complex Networks & Their Applications V, 2016.
+
+url: https://link.springer.com/chapter/10.1007/978-3-319-50901-3_42
+
+This paper characterizes the robustness properties of Erdos-Renyi and Barabasi-Albert
 random network models to various types of degree-based edge attacks as well as to
 random edge failure.
 
-Abstract: We analyze the tolerance of network controllability to degree-based edge
+**Abstract**: We analyze the tolerance of network controllability to degree-based edge
 attacks as well as random edge failure. In particular, we leverage both
 control-based and reachability-based robustness metrics to investigate the case
 when a fixed number of controls are allowed to change locations following each attack.
@@ -13,14 +16,6 @@ in which operators may have a fixed budget of resources but that these resources
 be redeployed in response to attacks on the system. We also identify that the most
 potent targeted attack for network controllability selects edges (on average) based
 on betweenness centrality.
-
-.. seealso::
-
-    Jijju Thomas, Supratim Ghosh, Deven Parek, Derek Ruths, Justin Ruths.
-    Robustness of Network Controllability to Degree-Based Edge Attacks.
-    Complex Networks & Their Applications V, 2016.
-
-    url: https://link.springer.com/chapter/10.1007/978-3-319-50901-3_42
 """
 import zen
 import netcontrolz

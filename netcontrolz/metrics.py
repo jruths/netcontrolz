@@ -10,22 +10,38 @@ from scipy.integrate import odeint
 from scipy.linalg import expm, eig, inv, qr, eigh
 from warnings import warn
 
-__all__ = ['finite_horizon_gramian','infinite_horizon_gramian','finite_horizon_discrete_gramian']
+__all__ = ['finite_horizon_gramian','infinite_horizon_gramian','finite_horizon_discrete_time_gramian']
 
 # CURRENTLY ASSUMES SYMMETRIC MATRIX
 def finite_horizon_gramian(A,B,T):
     """
     Returns the finite horizon (finite time) grammian matrix when the system
     is driven to the origin:
-        H = e^{-A*T} W e^{-A'*T}, where ' stands for transpose
+
+    .. math::
+        H = e^{-A*T} W e^{-A'*T},
+
+    where ' stands for transpose
+
+    .. math::
         W = \int_0^T e^{A*t} B B' e^{A'*t} dt
-    Driving a system from x0 to xT uses energy:
-        E = v' W^{-1} v,  with v = xT - e^{A*T}x0
-    If xT = 0 (origin) then this simplifies to
-        E = x0' H^{-1} x0
-    Bounds on the energy E can be established by the max and min eigenvalues
-    of H:
-        1/eigmax(H) <= E <= 1/eigmin(H).
+
+    Driving a system from :math:`x_0` to :math:`x_T` uses energy:
+
+    .. math::
+        \mathcal{E} = v' W^{-1} v,  \qquad v = x_T - e^{A*T}x_0
+
+    If :math:`x_T = 0` (origin) then this simplifies to
+
+    .. math::
+        \mathcal{E} = x_0' H^{-1} x_0
+
+    Bounds on the energy :math:`\mathcal{E}` can be established by the max and min eigenvalues
+    of H (:math:`\lambda_1 > \lambda_2 > \cdots > \lambda_n`):
+
+    .. math::
+        1/\lambda_1 \leq \mathcal{E} \leq 1/\lambda_n.
+
     Note that matrices A and B should be realizations, not sparsity patterns.
     """
     n = len(A)
@@ -60,16 +76,25 @@ def finite_horizon_gramian(A,B,T):
     return H
 
 # CURRENTLY ASSUMES SYMMETRIC MATRIX
-def finite_horizon_discrete_gramian(A,B,T):
+def finite_horizon_discrete_time_gramian(A,B,T):
     """
     Returns the finite horizon (finite time) grammian matrix when the system
     is driven from the origin:
+
+    .. math::
         W = \sum_{k=0}^{T-1} A^k B B' A^k
+
     Driving a system from the origin to xT uses energy:
-        E = xT' W^{-1} xT,
+
+    .. math::
+        \mathcal{E} = x_T' W^{-1} x_T,
+
     Bounds on the energy E can be established by the max and min eigenvalues
-    of W:
-        1/eigmax(W) <= E <= 1/eigmin(W).
+    of W (:math:`\lambda_1 > \lambda_2 > \cdots > \lambda_n`):
+
+    .. math::
+        1/\lambda_1 \leq \mathcal{E} \leq 1/\lambda_n.
+
     Note that matrices A and B should be realizations, not sparsity patterns.
     """
     BB = dot(B,B.T)

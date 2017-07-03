@@ -35,16 +35,19 @@ def edge_percolation_(G,attack,**kwargs):
     selection method indicated by ``attack``.
 
     **Args**
-        * ``attack`` (``string``). Indicates the type of edge selection method to use. Attack can also be a
-            callable function which takes in a DiGraph and returns the edge index that should be removed next.
+        * ``attack`` indicates the type of edge selection method to use. Supported attacks
+            include degree-based attacks: ``EDGE_ATTACK_ININ_DEG`` , ``EDGE_ATTACK_INOUT_DEG`` , ``EDGE_ATTACK_OUTIN_DEG`` , ``EDGE_ATTACK_OUTOUT_DEG`` , and ``EDGE_ATTACK_TOTAL_DEG`` (where, e.g., IN OUT ranks edges according to their source node's IN-degree and their target node's OUT-degree). ``ATTACK_RAND`` emulates random failures. ``attack`` can also be a callable function which takes in a :py:class:`zen.DiGraph` and returns the edge index that should be removed next.
 
     **KwArgs**:
-        *``controls[=None]`` (LIST_OF_TUPLES)
+
+        * ``controls[=None]`` (``LIST_OF_TUPLES``)
+
             *``LIST_OF_TUPLES``: Representing control nodes that are
             attached to the nodes in G e.g. [(1,),(3,)] represents two controls
             that are attached to node indices 1 and 3.
             When controls is not given (or None), a control set with minimal number of
             controls will be calculated and used.
+
         * ``frac_rm_edges [=0.5]`` (``float``). The fraction of edges to remove from the network. If
             ``num_steps`` does not divide this number of edges evenly, the actual fraction of edges removed
             may be slightly smaller than ``frac_rm_edges``.
@@ -53,8 +56,8 @@ def edge_percolation_(G,attack,**kwargs):
             control-based robustness and/or reachability-based robustness (fixed and/or free).
 
     **Returns**:
-        *``frac_edges_removed``. The fraction of edges remaining after each percolation steps, length ``num_steps``+1.
-        *``metrics_result``. A dictionary containing the chosen ``metrics`` at the percolation steps, each item
+        * ``frac_edges_removed``. The fraction of edges remaining after each percolation steps, length ``num_steps``+1.
+        * ``metrics_result``. A dictionary containing the chosen ``metrics`` at the percolation steps, each item
             in the dictionary has length ``num_steps``+1.
     """
     type_check(G,DiGraph,'only directed graphs are supported')

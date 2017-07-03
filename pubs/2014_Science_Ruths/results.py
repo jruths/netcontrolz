@@ -1,12 +1,15 @@
 """
-This script recreates the significant results from the paper below. In particular,
-the paper shows that the correlation between the minimal number of controls
+Justin Ruths and Derek Ruths. *Control Profiles of Complex Networks*. **Science**, 343(6177), 1373-1376 (2014).
+
+url: http://science.sciencemag.org/content/343/6177/1373
+
+The paper shows that the correlation between the minimal number of controls
 required to guarantee controllability and the degree distribution is mainly due
 to the number of sources and sinks in a network. The paper also presents a new
 statistic, the control profile, which categorizes networks into three groups,
 which correspond to the three components of the control profile.
 
-Abstract: Studying the control properties of complex networks provides insight
+**Abstract**: Studying the control properties of complex networks provides insight
 into how designers and engineers can influence these systems to achieve a desired
 behavior. Topology of a network has been shown to strongly correlate with certain
 control properties; here we uncover the fundamental structures that explain the
@@ -16,13 +19,6 @@ network. We find that standard random network models do not reproduce the kinds
 of control profiles that are observed in real-world networks. The profiles of
 real networks form three well-defined clusters that provide insight into the
 high-level organization and function of complex systems.
-
-.. seealso::
-
-    Justin Ruths and Derek Ruths. Control Profiles of Complex Networks. Science,
-    343(6177), 1373-1376 (2014).
-
-    url: http://science.sciencemag.org/content/343/6177/1373
 """
 import zen
 import netcontrolz

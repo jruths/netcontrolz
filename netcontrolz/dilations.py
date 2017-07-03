@@ -10,9 +10,9 @@ __all__ = ['num_dilations','all_in_neighbors','all_in_neighbors_']
 def num_dilations(G):
     """
     Returns the number of dilations in the directed network ``G``. This is also
-    equivalent to the smallest number of controls that are required to structurally
+    equivalent to the fewest number of controls that are required to structurally
     control the graph ``G`` (except in the degenerate case when there are zero
-    dilations, but one control).
+    dilations and there must still be one control).
     """
     type_check(G,DiGraph,'only directed graphs are supported')
 

@@ -1,12 +1,15 @@
 """
-This script recreates the most significant results from the paper below. This
-paper constructs the distribution of energies corresponding to the infinite
+Gang Yan, Georgios Tsekenis, Baruch Barzel, Jean-Jacques Slotine, Yang-Yu Liu, Albert-László Barabási. *Spectrum of controlling and observing complex networks*. **Nature Physics** 11, 779–786 (2015).
+
+url: http://www.nature.com/nphys/journal/v11/n9/abs/nphys3422.html
+
+This paper constructs the distribution of energies corresponding to the infinite
 horizon controllability Gramian. It observes largely scale-free distributions
 of energies when one or all nodes are driven by an external control(s). When
 an intermediate fraction of nodes is controlled, multi-peak distributions are
 observed and a gap between distinct bands of energies arises.
 
-Abstract: Recent studies have made important advances in identifying sensor or
+**Abstract**: Recent studies have made important advances in identifying sensor or
 driver nodes, through which we can observe or control a complex system. But the
 observational uncertainty induced by measurement noise and the energy required
 for control continue to be significant challenges in practical applications.
@@ -21,14 +24,6 @@ decays exponentially when the number of driver nodes increases. We validate our
 findings in several model and real networks, arriving at a series of fundamental
 laws to describe the control energy that together deepen our understanding of
 complex systems.
-
-.. seealso::
-
-    Gang Yan, Georgios Tsekenis, Baruch Barzel, Jean-Jacques Slotine, Yang-Yu Liu,
-    Albert-László Barabási. Spectrum of controlling and observing complex networks.
-    Nature Physics 11, 779–786 (2015).
-
-    url: http://www.nature.com/nphys/journal/v11/n9/abs/nphys3422.html
 """
 import zen
 import netcontrolz

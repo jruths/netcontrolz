@@ -1,7 +1,9 @@
 """
-This script reproduces the main results from the paper below.
+Gang Yan, Jie Ren, Ying-Cheng Lai, Choy-Heng Lai, and Baowen Li. *Controlling Complex Networks: How Much Energy Is Needed?* **Phys. Rev. Lett.** 108, 218703 (2012).
 
-The outstanding problem of controlling complex networks is relevant to many areas
+url: http://link.aps.org/doi/10.1103/PhysRevLett.108.218703
+
+**Abstract**: The outstanding problem of controlling complex networks is relevant to many areas
 of science and engineering, and has the potential to generate technological
 breakthroughs as well. We address the physically important issue of the energy
 required for achieving control by deriving and validating scaling laws for the
@@ -10,13 +12,6 @@ the energy cost associated with control, and provide a step forward from the
 current research on controllability toward ultimate control of complex networked
 dynamical systems.
 
-..seealso::
-
-    Gang Yan, Jie Ren, Ying-Cheng Lai, Choy-Heng Lai, and Baowen Li. Controlling
-    Complex Networks: How Much Energy Is Needed? Phys. Rev. Lett. 108, 218703
-    (2012).
-
-    url: http://link.aps.org/doi/10.1103/PhysRevLett.108.218703
 ==========================================
 STILL BEING IMPLEMENTED
 ==========================================
