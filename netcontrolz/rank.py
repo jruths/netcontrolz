@@ -15,7 +15,7 @@ def generic_rank(G):
     Returns the generic rank of the graph ``G``. This is equivalent to the size
     of the maximum matching of the graph ``G``; also equivalent to the difference
     between the number of nodes in the network and the number of dilations, see
-    :py:method:`num_dilations`).
+    :py:method:`netcontrolz.num_dilations`).
 
     """
     type_check(G,DiGraph,'only directed graphs are supported')

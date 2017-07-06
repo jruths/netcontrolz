@@ -56,9 +56,9 @@ def edge_percolation_(G,attack,**kwargs):
             control-based robustness and/or reachability-based robustness (fixed and/or free).
 
     **Returns**:
-        * ``frac_edges_removed``. The fraction of edges remaining after each percolation steps, length ``num_steps``+1.
+        * ``frac_edges_removed``. The fraction of edges remaining after each percolation steps, length ``num_steps+1``.
         * ``metrics_result``. A dictionary containing the chosen ``metrics`` at the percolation steps, each item
-            in the dictionary has length ``num_steps``+1.
+            in the dictionary has length ``num_steps+1``.
     """
     type_check(G,DiGraph,'only directed graphs are supported')
     if not G.is_compact():

@@ -1,6 +1,6 @@
 Metrics for Quantifying Controllability
 ===========
-Much of network control assumes the state dynamics follow a linear time-invariant model. These functions provide assistive functions to deal with both the transition from network to linear systems as well as generating specific realizations of and LTI system (with weights) from and structured network.
+While controllability offers a binary quantification of control (are all state tranformations possible?), there are more fine-grained metrics that can be used. The amount of energy used to make a state transformation is contained in the Gramian matrix, and gives an assessment of how practical a control configuration might be, even if it is technically controllable.
 
 .. autofunction:: netcontrolz.finite_horizon_gramian(A,B,T)
 

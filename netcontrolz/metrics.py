@@ -15,7 +15,7 @@ __all__ = ['finite_horizon_gramian','infinite_horizon_gramian','finite_horizon_d
 # CURRENTLY ASSUMES SYMMETRIC MATRIX
 def finite_horizon_gramian(A,B,T):
     """
-    Returns the finite horizon (finite time) grammian matrix when the system
+    Returns the finite horizon (finite time) Gramian matrix when the system
     is driven to the origin:
 
     .. math::
@@ -37,12 +37,12 @@ def finite_horizon_gramian(A,B,T):
         \mathcal{E} = x_0' H^{-1} x_0
 
     Bounds on the energy :math:`\mathcal{E}` can be established by the max and min eigenvalues
-    of H (:math:`\lambda_1 > \lambda_2 > \cdots > \lambda_n`):
+    of :math:`H` (:math:`\lambda_1 > \lambda_2 > \cdots > \lambda_n`):
 
     .. math::
         1/\lambda_1 \leq \mathcal{E} \leq 1/\lambda_n.
 
-    Note that matrices A and B should be realizations, not sparsity patterns.
+    Note that matrices ``A`` and ``B`` should be realizations, not sparsity patterns.
     """
     n = len(A)
     n2 = n**2
@@ -78,24 +78,24 @@ def finite_horizon_gramian(A,B,T):
 # CURRENTLY ASSUMES SYMMETRIC MATRIX
 def finite_horizon_discrete_time_gramian(A,B,T):
     """
-    Returns the finite horizon (finite time) grammian matrix when the system
+    Returns the finite horizon (finite time, ``T``) Gramian matrix when the system
     is driven from the origin:
 
     .. math::
         W = \sum_{k=0}^{T-1} A^k B B' A^k
 
-    Driving a system from the origin to xT uses energy:
+    Driving a system from the origin to :math:`x_T` uses energy:
 
     .. math::
         \mathcal{E} = x_T' W^{-1} x_T,
 
-    Bounds on the energy E can be established by the max and min eigenvalues
-    of W (:math:`\lambda_1 > \lambda_2 > \cdots > \lambda_n`):
+    Bounds on the energy :math:`E` can be established by the max and min eigenvalues
+    of :math:`W` (:math:`\lambda_1 > \lambda_2 > \cdots > \lambda_n`):
 
     .. math::
         1/\lambda_1 \leq \mathcal{E} \leq 1/\lambda_n.
 
-    Note that matrices A and B should be realizations, not sparsity patterns.
+    Note that matrices ``A`` and ``B`` should be realizations, not sparsity patterns.
     """
     BB = dot(B,B.T)
     W = BB
@@ -159,7 +159,7 @@ def finite_horizon_discrete_time_gramian(A,B,T):
 # CURRENTLY ASSUMES SYMMETRIC MATRIX
 def infinite_horizon_gramian(A,B):
     """
-    Returns the infinite horizon (final time goes to infinity) Grammian matrix
+    Returns the infinite horizon (final time goes to infinity) Gramian matrix
     corresponiding to a symmetric stable matrix ``A``.
     """
     n = len(A)

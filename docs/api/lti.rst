@@ -10,7 +10,7 @@ or the continuous time analog
 .. math::
     \dot{x}(t) = Ax(t) + Bu(t).
 
-These functions provide assistive functions to deal with both the transition from network to linear systems as well as generating specific realizations of and LTI system (with weights) from and structured network.
+These functions provide assistive functions to help with the transition from a network model to a linear systems model as well as facilitate generating specific realizations of a LTI system (with weights) from a structured network.
 
 .. autofunction:: netcontrolz.kalman_generic_rank_(G,controls[,repeats=None])
 

@@ -8,30 +8,38 @@ or the continuous time analog
 from numpy import zeros
 from numpy.random import random
 
-__all__ = ['controls_idx','input_matrix_','matrix_realization','fix_diagonals','kalman_generic_rank_']
+__all__ = ['controls_idx','input_matrix','input_matrix_','matrix_realization','fix_diagonals','kalman_generic_rank','kalman_generic_rank_']
 
 def controls_idx(G,controls):
     """
     Convenience function to return the list of tuples of control indices of a network
     ``G`` corresponding to the list of tuples of node objects in ``controls``.
     """
-    controls_ = []
-    for control in controls:
-        controls_.append( tuple( [G.node_idx(c) for c in control]  ) )
-    return controls_
+    return [tuple(G.node_idx(a) for a in c) for c in controls]
 
-def input_matrix_(n,controls_,m=None):
+def input_matrix(G,controls,m=None):
     """
     Returns the ``n`` x ``m`` input matrix B corresponding to the list of tuples
-    ``controls_`` of node indices that are driven by the controls. If ``m`` is
+    ``controls`` of node indices that are driven by the controls, where ``n`` is
+    the number of nodes in the network ``G`` (if ``G`` is not compact, then the
+    size ``n`` may be larger than the number of nodes). If ``m`` is
     not specified, then ``m`` is taken as the number of controls (i.e., the
-    length of ``controls_``).
+    length of ``controls``).
+    """
+    return input_matrix_(G.max_node_idx+1,controls_idx(controls),m)
+
+def input_matrix_(n,controls,m=None):
+    """
+    Returns the ``n`` x ``m`` input matrix B corresponding to the list of tuples
+    ``controls`` of node indices that are driven by the controls. If ``m`` is
+    not specified, then ``m`` is taken as the number of controls (i.e., the
+    length of ``controls``).
     """
     if m is None:
-        m = len(controls_)
+        m = len(controls)
     B = zeros((n,m))
-    for j,control_ in enumerate(controls_):
-        for ci in control_:
+    for j,control in enumerate(controls):
+        for ci in control:
             B[ci,j] = 1
     return B
 
@@ -56,17 +64,31 @@ def fix_diagonals(M,d):
     .. math::
         M_{ii} = -(d + \sum_{j=1}^n M_{ij})
 
-    which is simply just the a perturbation d away from the row sum of M.
-    Selecting ``d`` > 0 ensures the eigenvalues of a symmetric matrix are negative.
+    which is simply just a perturbation ``d`` away from the row sum of ``M``.
+    Selecting ``d > 0`` ensures the eigenvalues of a symmetric matrix are negative.
     """
     for i in range(len(M)):
         M[i,i] = -( d + M[i,:].sum() )
     return M
 
+def kalman_generic_rank(G,controls,repeats=None):
+    """
+    Finds the reachability corresponding to a graph ``G`` (adjacency matrix A) and its
+    ``controls`` (a list of tuples of node objects) by brute force computing the Kalman rank condition:
+
+    .. math::
+        rank [B AB A^2B A^3B ... A^(n-1)B].
+
+    In order to compute the rank generically, we generate random entries for A and B,
+    subject to their zero/non-zero sparsity patterns and compute the true rank. We
+    repeat this ``repeats`` times (default is 100) and return the largest value.
+    """
+    return kalman_generic_rank_(G,controls_idx(controls),repeats)
+
 def kalman_generic_rank_(G,controls,repeats=None):
     """
     Finds the reachability corresponding to a graph ``G`` (adjacency matrix A) and its
-    controls (a list of tuples) by brute force computing the Kalman rank condition:
+    ``controls`` (a list of tuples of node indices) by brute force computing the Kalman rank condition:
 
     .. math::
         rank [B AB A^2B A^3B ... A^(n-1)B].

@@ -23,9 +23,9 @@ building a :py:class:`Cacti`, you may use the following complementary functions.
 
 
 Constructing the Cacti of a Directed Graph
--------------------------
+----------------------------------------------
 netcontrolz provides several handles to create the :py:class:`Cacti` for studying structural
-control. A cactus is a collection of a single stem and any number of buds, which are cycles that have a distinguished edge emanating from the stem or an existing bud. The follow constructor functions provide ways to build the cacti that cover a directed graph with no controls provided, precise controls provided, or only a requirement on the number of controls used. Alternatively, you may provide a matching of your own choice and construct the :py:class:`Cacti` from it.
+control. A cactus is a collection of a single stem and any number of buds, which are cycles that have a node with a *distinguished* inbound edge from a node in the stem or from a node in an existing bud. The follow constructor functions provide ways to build the cacti that cover a directed graph when provided with: no controls, specific nodes to be controlled, or only a  number of controls to be used. Alternatively, you may provide a matching of your own choice and construct the :py:class:`Cacti` from it.
 
 .. autofunction:: netcontrolz.build_cacti(G)
 
@@ -41,7 +41,7 @@ control. A cactus is a collection of a single stem and any number of buds, which
 
 
 Accessing the Cacti of a Directed Graph
-------------------
+-----------------------------------------------
 Once the :py:class:`Cacti` are formed, questions regarding the number of controls or
 the number of nodes that are controllable can be answered. The :py:class:`Stem` and :py:class:`Cycle` classes provide handles to traverse the cacti.
 
@@ -56,13 +56,13 @@ the number of nodes that are controllable can be answered. The :py:class:`Stem` 
 
 
 Computing & Plotting the Control Profile
----------------------------------------
+--------------------------------------------
 Control profiles were devised as a measure for quantifying the structures responsible for dictating how many
 controls a network requires and where these controls much attach to the network.
 
 .. seealso::
 
-    J. Ruths and D. Ruths (2014). Control Profiles of Complex Networks. Science, 343(6177), 1373-1376.
+    Justin Ruths and Derek Ruths. *Control Profiles of Complex Networks*. **Science**, 343(6177), 1373-1376 (2014).
 
 .. autofunction:: netcontrolz.profile(G[,normalized=True])
 
@@ -75,8 +75,12 @@ Visualizing control profile plots can be particularly helpful when comparing the
 .. autofunction:: netcontrolz.profile_heatmap_weighted(G,...)
 
 Robustness of Network Controllability
-------------------------------------
+-----------------------------------------
 Network controllability properties change as the graph is altered. An important
 class of network alterations includes random failures and attacks.
+
+.. seealso::
+
+    Jijju Thomas, Supratim Ghosh, Deven Parek, Derek Ruths, Justin Ruths. *Robustness of Network Controllability to Degree-Based Edge Attacks*. Complex Networks & Their Applications V, 2016.
 
 .. autofunction:: netcontrolz.edge_percolation_(G,attack,...)
