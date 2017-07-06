@@ -21,7 +21,7 @@ def finite_horizon_gramian(A,B,T):
     .. math::
         H = e^{-A*T} W e^{-A'*T},
 
-    where ' stands for transpose
+    where :math:`'` stands for transpose
 
     .. math::
         W = \int_0^T e^{A*t} B B' e^{A'*t} dt

@@ -4,12 +4,13 @@ reachability-based robustness metrics for controllability of networks
 under failure and attack.
 """
 from cacti import build_cacti, build_cacti_fixed_controls_, build_cacti_free_controls
+from lti import controls_idx
 from zen import DiGraph
 from zen.exceptions import type_check
 from numpy import floor,zeros, linspace, argsort
 from numpy.random import choice
 
-__all__ = ['edge_percolation_','ATTACK_RAND','EDGE_ATTACK_INOUT_DEG','EDGE_ATTACK_OUTIN_DEG','EDGE_ATTACK_ININ_DEG','EDGE_ATTACK_OUTOUT_DEG','EDGE_ATTACK_TOTAL_DEG','CONTROL_ROBUSTNESS','REACHABILITY_ROBUSTNESS_FIXED','REACHABILITY_ROBUSTNESS_FREE']
+__all__ = ['edge_percolation','edge_percolation_','ATTACK_RAND','EDGE_ATTACK_INOUT_DEG','EDGE_ATTACK_OUTIN_DEG','EDGE_ATTACK_ININ_DEG','EDGE_ATTACK_OUTOUT_DEG','EDGE_ATTACK_TOTAL_DEG','CONTROL_ROBUSTNESS','REACHABILITY_ROBUSTNESS_FIXED','REACHABILITY_ROBUSTNESS_FREE']
 
 ATTACK_RAND = 'rand'
 EDGE_ATTACK_INOUT_DEG = 'inout'
@@ -29,36 +30,54 @@ REACHABILITY_ROBUSTNESS_FIXED = 'reach_fixed'
 REACHABILITY_ROBUSTNESS_FREE = 'reach_free'
 METRICS_ALL = (CONTROL_ROBUSTNESS,REACHABILITY_ROBUSTNESS_FIXED,REACHABILITY_ROBUSTNESS_FREE)
 
+def edge_percolation(G,attack,**kwargs):
+    """
+    Computes robustness metrics of controllability for the directed network ``G`` according to the edge
+    selection method indicated by ``attack``.
+
+    See method ``edge_percolation_``. The only difference is that the controls here are given as a list of tuples of node objects instead of node indices.
+    """
+    controls = kwargs.pop('controls',None)
+    if controls:
+        kwargs['controls'] = controls_idx(G,controls)
+
+    return edge_percolation_(G,attack,kwargs)
+
 def edge_percolation_(G,attack,**kwargs):
     """
     Computes robustness metrics of controllability for the directed network ``G`` according to the edge
     selection method indicated by ``attack``.
 
     **Args**
-        * ``attack`` indicates the type of edge selection method to use. Supported attacks
-            include degree-based attacks: ``EDGE_ATTACK_ININ_DEG`` , ``EDGE_ATTACK_INOUT_DEG`` , ``EDGE_ATTACK_OUTIN_DEG`` , ``EDGE_ATTACK_OUTOUT_DEG`` , and ``EDGE_ATTACK_TOTAL_DEG`` (where, e.g., IN OUT ranks edges according to their source node's IN-degree and their target node's OUT-degree). ``ATTACK_RAND`` emulates random failures. ``attack`` can also be a callable function which takes in a :py:class:`zen.DiGraph` and returns the edge index that should be removed next.
+        * ``attack`` indicates the type of edge selection method to use. Supported values of ``attacks`` include:
+            * ``netcontrolz.EDGE_ATTACK_ININ_DEG`` (degree-based attack)
+            * ``netcontrolz.EDGE_ATTACK_INOUT_DEG`` (degree-based attack)
+            * ``netcontrolz.EDGE_ATTACK_OUTIN_DEG`` (degree-based attack)
+            * ``netcontrolz.EDGE_ATTACK_OUTOUT_DEG`` (degree-based attack)
+            * ``netcontrolz.EDGE_ATTACK_TOTAL_DEG`` (degree-based attack)
+            * ``netcontrolz.ATTACK_RAND`` (random failure)
+            * callable function which takes in a :py:class:`zen.DiGraph` and returns the edge index that should be removed next
+
+            For degree-based attacks, for example, INOUT ranks edges according to their source node's IN-degree and their target node's OUT-degree; OUTIN ranks edges according to their source node's OUT-degree and their target node's IN-degree; etc.
 
     **KwArgs**:
 
         * ``controls[=None]`` (``LIST_OF_TUPLES``)
 
-            *``LIST_OF_TUPLES``: Representing control nodes that are
-            attached to the nodes in G e.g. [(1,),(3,)] represents two controls
-            that are attached to node indices 1 and 3.
-            When controls is not given (or None), a control set with minimal number of
-            controls will be calculated and used.
+            * ``LIST_OF_TUPLES``: Representing control nodes (indices) that are attached to the nodes in G e.g. [(1,),(3,)] represents two controls that are attached to node indices 1 and 3. When controls is not given (or None), a control set with minimal number of controls will be calculated and used.
 
-        * ``frac_rm_edges [=0.5]`` (``float``). The fraction of edges to remove from the network. If
-            ``num_steps`` does not divide this number of edges evenly, the actual fraction of edges removed
-            may be slightly smaller than ``frac_rm_edges``.
+        * ``frac_rm_edges [=0.5]`` (``float``). The fraction of edges to remove from the network. If ``num_steps`` does not divide this number of edges evenly, the actual fraction of edges removed may be slightly smaller than ``frac_rm_edges``.
         * ``num_steps [=10]`` (``int``). The number of steps of percolation.
-        * ``metrics [=('control','reach_fixed','reach_free')]`` (``py:tuple``). The metrics to return:
-            control-based robustness and/or reachability-based robustness (fixed and/or free).
+        * ``metrics`` (``py:tuple``). The metrics to calculate and return. The options are:
+            * ``netcontrolz.CONTROL_ROBUSTNESS`` which measures the increase in the minimum number of controls required to control the network.
+            * ``netcontrolz.REACHABILITY_ROBUSTNESS_FIXED`` which measures the decrease in the number of nodes controllable by a fixed set of controls.
+            * ``netcontrolz.REACHABILITY_ROBUSTNESS_FREE`` which measures the decrease in the number of nodes controllable by a fixed number of controls.
+
 
     **Returns**:
         * ``frac_edges_removed``. The fraction of edges remaining after each percolation steps, length ``num_steps+1``.
-        * ``metrics_result``. A dictionary containing the chosen ``metrics`` at the percolation steps, each item
-            in the dictionary has length ``num_steps+1``.
+        * ``metrics_result``. A dictionary containing the chosen ``metrics`` at the percolation steps, each item in the dictionary has length ``num_steps+1``.
+
     """
     type_check(G,DiGraph,'only directed graphs are supported')
     if not G.is_compact():

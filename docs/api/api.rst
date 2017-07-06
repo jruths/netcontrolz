@@ -1,7 +1,7 @@
 .. _api-top:
 
 netcontrolz Library Reference
-=====================
+===============================
 
 Below are the major thematic sections of the netcontrolz library.
 

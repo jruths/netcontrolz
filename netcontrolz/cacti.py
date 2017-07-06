@@ -317,7 +317,7 @@ def build_cacti_from_matching(G, fixed_ctls, matching, roots=None):
     and a precomputed matching. This requires the matching, the roots of the matching
     and the subset of roots that are controlled (the fixed_ctrls).
 
-    **Args**: see method build_cacti_from_matching_
+    **Args**: see method ``build_cacti_from_matching_``
               Only difference here is that fixed_ctls are node objs and not indices. The matching is passed as tuples of node pairs.
 
     Returns a :py:class:`Cacti` object.
@@ -376,7 +376,7 @@ def build_cacti_fixed_controls(G, fixed_ctls, **kwargs):
     weighted matching is used to calculate reachable/controllable nodes given
     the fixed controls.
 
-    **Args**: see method build_cacti_fixed_controls_
+    **Args**: see method ``build_cacti_fixed_controls_``
               Only difference here is that fixed_ctls are node objs and not
               indices.
 

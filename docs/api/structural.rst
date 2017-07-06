@@ -1,5 +1,6 @@
 (Linear) Structural Control
-===========
+==============================
+
 Structural control is one of the major tools used to study control (and
 specifically controllability) of directed networks.  Structural control is
 a relaxation of conventional control methods in which the (edge) weights of the
@@ -82,5 +83,7 @@ class of network alterations includes random failures and attacks.
 .. seealso::
 
     Jijju Thomas, Supratim Ghosh, Deven Parek, Derek Ruths, Justin Ruths. *Robustness of Network Controllability to Degree-Based Edge Attacks*. Complex Networks & Their Applications V, 2016.
+
+.. autofunction:: netcontrolz.edge_percolation(G,attack,...)
 
 .. autofunction:: netcontrolz.edge_percolation_(G,attack,...)

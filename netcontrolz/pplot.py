@@ -403,7 +403,7 @@ def profile_heatmap_weighted(items,**kwargs):
     Plots a weighted combination of control profiles as a heatmap on a triangular control
     profile plot. ``items`` is a list of other lists composed of: control profile 3-tuple,
     3-list, or :py:class:`zen.DiGraph` (in which case the control profile of the graph will be
-    computed and then plotted). A ``weights'' parameter can be specified to weight the
+    computed and then plotted). A ``weights`` parameter can be specified to weight the
     combination, typically used to combine multiple categories together in and equitable
     manner.
 

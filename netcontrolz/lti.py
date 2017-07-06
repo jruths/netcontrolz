@@ -77,7 +77,7 @@ def kalman_generic_rank(G,controls,repeats=None):
     ``controls`` (a list of tuples of node objects) by brute force computing the Kalman rank condition:
 
     .. math::
-        rank [B AB A^2B A^3B ... A^(n-1)B].
+        rank [B\ AB\ A^2B\ A^3B\ \cdots\ A^{(n-1)}B].
 
     In order to compute the rank generically, we generate random entries for A and B,
     subject to their zero/non-zero sparsity patterns and compute the true rank. We
@@ -91,7 +91,7 @@ def kalman_generic_rank_(G,controls,repeats=None):
     ``controls`` (a list of tuples of node indices) by brute force computing the Kalman rank condition:
 
     .. math::
-        rank [B AB A^2B A^3B ... A^(n-1)B].
+        rank [B\ AB\ A^2B\ A^3B\ \cdots\ A^{(n-1)}B].
 
     In order to compute the rank generically, we generate random entries for A and B,
     subject to their zero/non-zero sparsity patterns and compute the true rank. We

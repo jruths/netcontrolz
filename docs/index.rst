@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 netcontrolz Library Documentation
-=========================
+===================================
 
 .. toctree::
 	:hidden:
@@ -16,6 +16,6 @@ netcontrolz Library Documentation
 Welcome to netcontrolz's technical documentation.
 
  	* The :doc:`API Reference <api/api>` for all classes, methods, and functions in the netcontrolz library.
-	* A :doc:`collection of results of selected papers <pubs/pubs_top>` that are recreated using the netcontrolz library. These simultaneously serve as tutorials for using the library.
+	* A :doc:`collection of results of selected papers <pubs>` that are recreated using the netcontrolz library. These simultaneously serve as tutorials for using the library.
 
 netcontrolz is released under the :doc:`BSD license <license>`.

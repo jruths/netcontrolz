@@ -18,13 +18,14 @@ def profile(G,**kwargs):
     Compute the control profile for the directed network ``G``.
 
     **KwArgs**:
-          * ``normalized [=True]`` (``boolean``). Indicates whether each element in the control
-          profile should be normalized by the number of controls.
+          * ``normalized [=True]`` (``boolean``). Indicates whether each element in the control profile should be normalized by the number of controls.
+
 
     **Returns**:
         ``(s,e,i)``. The control profile consisting of the source controls, external-dilation controls,
         and internal-dilation controls.  Un-normalized, these values with the the number of each.  Normalized
         these values will be the fraction of all controls needed by the network belonging to each type.
+
     """
     # this only works on directed graphs
     type_check(G,DiGraph,'Only directed graphs are supported')

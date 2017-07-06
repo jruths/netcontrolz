@@ -40,7 +40,7 @@ upload:
 	scp -r _build/html druths.webfactional.com:/home/druths/webapps/rr_static/zen
 
 html:
-	export PYTHONPATH=../../src:${PYTHONPATH}; \
+	#export PYTHONPATH=../netcontrolz/:${PYTHONPATH}; \
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."

@@ -1,4 +1,4 @@
 Publication Results Recreated with netcontrolz
-===========
+===================================================
 
-.. automodule:: pubs
+.. automodule:: netcontrolz.pubs
