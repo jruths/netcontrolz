@@ -6,12 +6,15 @@
 # The product of python compilation/running
 *.pyc
 
+# The util matching cpp file
+netcontrolz/util/matching.cpp
+
 # Mac oddities
 .DS_Store
 
 # Build directory
-./build
+build/
 
 # Documentation build directory
-./docs/_build
-./docs
+docs/_build/
+docs/_static
