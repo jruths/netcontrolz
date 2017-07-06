@@ -1,0 +1,17 @@
+# The product of cython compilation
+*.c
+*.o
+*.so
+
+# The product of python compilation/running
+*.pyc
+
+# Mac oddities
+.DS_Store
+
+# Build directory
+./build
+
+# Documentation build directory
+./docs/_build
+./docs
