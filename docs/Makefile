@@ -37,7 +37,7 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 upload:
-	scp -r _build/html druths.webfactional.com:/home/druths/webapps/rr_static/zen
+	scp -r _build/html/* ruths@ruthsnet.com:./webapps/wp_justinruths/netcontrolz
 
 html:
 	#export PYTHONPATH=../netcontrolz/:${PYTHONPATH}; \
