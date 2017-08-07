@@ -510,7 +510,7 @@ def directed_free_roots_max_weight_matching(Gi, **kwargs):
             eidx = Gi2.add_edge_(u,v,weight=w,data=NO_COUNT_EDGE)
             extra_edges.add(eidx)
 
-    num_matched, result, selected_roots = __directed_fixed_roots_max_weight_matching(Gi2, **kwargs)
+    num_matched, result, selected_roots = directed_fixed_roots_max_weight_matching(Gi2, **kwargs)
 
     num_matched -= num_roots
     result = set(result)
