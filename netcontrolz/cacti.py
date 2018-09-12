@@ -121,7 +121,7 @@ class Cycle:
         """
         self._node_dict = OrderedDict.fromkeys(node_seq)
         self._G = Gi
-        self.droot = None
+        self._droot = None
         self._dnode = None
 
     def __contains__(self,x):
@@ -231,7 +231,7 @@ class Cycle:
         """
         Returns ``True`` if this cycle is a bud.
         """
-        return self._stem != None
+        return self._droot != None
 
     def _set_bud(self, x, bud):
         """
